@@ -8,11 +8,19 @@
     grid-template-columns: repeat(var(--grid-cols), 1fr);
     /*box-shadow: 0.4em -0 .4em gray, -0.4em 0 .4em gray;*/
   }
-  .cero {  
+  .operatorGrid {
     display: grid;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    /*box-shadow: 0.4em -0 .4em gray, -0.4em 0 .4em gray;*/
+  }
+  .buttons{
+    display: flex;
+    flex-direction: row;
   }
   .grid-item,
-  .ceros {
+  .operators,
+  .result {
     border: 1px solid black;
     /*padding: 1em;*/
     text-align: center;
