@@ -27,4 +27,14 @@ digitos.style.setProperty('--grid-cols', 3);
     };
 
     var data = document.getElementsByClassName('grid-item');
+    for (var i = 0 ; i < data.length; i++) {
+      //console.log('inside for');
+      data[i].addEventListener('click', function (e) {
+      //console.log('inside click');
+      const count=[];
+      count.push(data.innerHTML)
+      //e.target.style.backgroundColor = 'blue';
+
+      });
+   }
   
