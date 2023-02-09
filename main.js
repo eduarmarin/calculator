@@ -1,10 +1,10 @@
 const digitos = document.querySelector('.digitos');
 const operatorGrid = document.querySelector('.operatorGrid');
-const count=[];
+var count=[];
 
 digitos.style.setProperty('--grid-rows', 3);
 digitos.style.setProperty('--grid-cols', 3);
-  for (c = 0; c < 12; c++) {
+  for (c = 0; c < 12; c++) {                 //this for create the number buttons
     var cell = document.createElement('div');
     cell.classList.add('grid-item');
     cell.textContent = c+1;
@@ -16,7 +16,7 @@ digitos.style.setProperty('--grid-cols', 3);
 
   operatorGrid.style.setProperty('--grid-rows', 5);
   operatorGrid.style.setProperty('--grid-cols', 1);
-    for (c = 0; c < 5; c++) {
+    for (c = 0; c < 5; c++) {                       //this for create the operator buttons
       var cell = document.createElement('div');
       cell.classList.add('operators');
       operatorGrid.appendChild(cell); 
@@ -27,13 +27,24 @@ digitos.style.setProperty('--grid-cols', 3);
       if (c==4){cell.textContent = '='}
     };
 
-    var data = document.getElementsByClassName('grid-item');
-    for (var i = 0 ; i < data.length; i++) {
-      data[i].addEventListener('click', function (e) {
-      console.log('digitos ' +e.target.innerHTML);
-      //count.push(data.innerHTML);
-      //e.target.style.backgroundColor = 'blue';
+    var button = document.getElementsByClassName('grid-item'); // this code read and and print in result  screen
+    for (var i = 0 ; i < button.length; i++) {
+      button[i].addEventListener('click', function (e) {
 
+        var newnum=e.target.innerHTML;
+        if(e.target.innerHTML == '.' && count(0)==='.'){newnum=''}
+        count.push(newnum);
+
+        var print = parseFloat(count.join('')); // join and turn to float
+        console.log('digitos ' +print+' type '+ typeof print);
+
+        if(e.target.innerHTML == '.'&& document.getElementById("result").innerHTML === '0'){ print = 0;}
+        document.getElementById("result").innerHTML = print;
+
+        if(e.target.innerHTML == 'C'){
+          count = [];
+          document.getElementById("result").innerHTML = 0;
+        }
       });
    }
   
