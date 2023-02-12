@@ -1,7 +1,7 @@
 const digitos = document.querySelector('.digitos');
 const operatorGrid = document.querySelector('.operatorGrid');
-var count = [];
-var numbers = [];
+var temporalCero = []; // gets every number clicked
+var numbers = []; // contain first number, operator and second number
 
 digitos.style.setProperty('--grid-rows', 3); //this one create the number buttons
 digitos.style.setProperty('--grid-cols', 3);
@@ -31,34 +31,51 @@ digitos.style.setProperty('--grid-cols', 3);
     var buttonOper = document.getElementsByClassName('operators'); //read operators grid
     for (var i = 0 ; i < buttonOper.length; i++) {
       buttonOper[i].addEventListener('click', function  calculatorOper (e) { // create function to recall it
-        numbers[1]=e.target.innerHTML; // store the operator <---------------------------------------------------------
-        console.log('inside oper '+numbers);
-        return numbers;    
+        temporalCero = [];
+        resultScreen(e.target.innerHTML);
+        
+        if(e.target.innerHTML == '='){ // show the result after click '=' <---------------------------------------------------
+          console.log('inside = ' + numbers[1]);
+          if(numbers[1] == '+'){var result = numbers[0] + numbers[2];}
+          if(numbers[1] == '-'){result=numbers[0] - numbers[2];}
+          if(numbers[1] == '*'){result=numbers[0] * numbers[2];}
+          if(numbers[1] == '/'){result=numbers[0] / numbers[2];}
+          resultScreen(result);
+          numbers[0] = result;
+        }else{numbers[1]=e.target.innerHTML;} // store the operator <---------------------------------------------------------
       });
-      
     }
-    console.log('oper '+numbers);
+    
+    function resultScreen(value){ // show everything in the screen result
+      document.getElementById("result").innerHTML = value;
+    }
     
     var button = document.getElementsByClassName('grid-item'); //read numbers grid
     for (var i = 0 ; i < button.length; i++) {
       button[i].addEventListener('click', function  calculator (e) { // create function calculator to recall it
 
         var newnum=e.target.innerHTML;
-        if(newnum === '.' && count.includes('.')==true){calculator()}//only read one dot else recall calculator()
-        count.push(newnum);
-        console.log('count '+count+' count.length '+count.length);
+        if(newnum === '.' && temporalCero.includes('.')==true){calculator()}//only read one dot else recall calculator()
+        
+        temporalCero.push(newnum); // push evey new digit
+        var temporal = parseFloat(temporalCero.join('')); // join and turn to float, take the first dot the otherones no!!!
 
-        var print = parseFloat(count.join('')); // join and turn to float, take the first dot the otherones no!!!
-        console.log('print '+print);
-        numbers[0]=print; // store the first number to be calculated  <---------------------------------------------------------
-        console.log(numbers);
+        if(numbers.length >= 2) {
+          numbers[2]=temporal; // store the second number to be calculated  <---------------------------------------------------------
+          console.log('filling third box '+numbers);
+        }else{
+          numbers[0]=temporal; // store the first number to be calculated  <---------------------------------------------------------
+          console.log('filling first box '+numbers);  
+         }
 
-        if(e.target.innerHTML == '.'&& document.getElementById("result").innerHTML === '0'){ print = 0;} // no print NaN in the screen 
-        document.getElementById("result").innerHTML = print;
+        if(e.target.innerHTML === '.' && document.getElementById("result").innerHTML === '0'){ temporal = 0;} // no print NaN in the screen 
+        resultScreen(temporal);
 
         if(e.target.innerHTML == 'C'){
-          count = [];
-          document.getElementById("result").innerHTML = 0;
+          temporalCero = [];
+          temporal = 0;
+          numbers = [];
+          resultScreen(0);
         }
       });
     }
