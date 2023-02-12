@@ -3,7 +3,7 @@
     --grid-rows: autos;
   }
   .calculator{
-    width: 500px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     background-color: aquamarine  ;
@@ -33,7 +33,7 @@
   .result {
     display: flex;
     margin: 2px;
-    width: 120px;
+    width: 90px;
     height: 50px;
     border: 1px solid black;
     /*padding: 1em;*/
@@ -43,6 +43,9 @@
     background-color: gray;
     font-size: x-large;
   }
+  .grid-item{
+    margin-bottom: 16px;
+  }
 
   .grid-item:hover,
   .operators:hover{
@@ -50,7 +53,7 @@
   }
 
   .result {
-    width: 486px;
+    width: 96%;
     height: 60px;
     margin: 5px;
     display: flex;
