@@ -3,7 +3,7 @@
     --grid-rows: autos;
   }
   .calculator{
-    width: 400px;
+    width: 500px;
     display: flex;
     flex-direction: column;
     background-color: aquamarine  ;
@@ -25,12 +25,36 @@
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
   }
   .grid-item,
   .operators,
   .result {
+    display: flex;
+    margin: 2px;
+    width: 120px;
+    height: 50px;
     border: 1px solid black;
     /*padding: 1em;*/
     text-align: center;
+    align-items: center;
+    justify-content: center;
     background-color: gray;
+    font-size: x-large;
+  }
+
+  .grid-item:hover,
+  .operators:hover{
+    scale: 1.05;
+  }
+
+  .result {
+    width: 486px;
+    height: 60px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: xx-large;
   }

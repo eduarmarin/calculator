@@ -26,31 +26,42 @@ digitos.style.setProperty('--grid-cols', 3);
       if (c==2){cell.textContent = '*'}
       if (c==3){cell.textContent = '/'}
       if (c==4){cell.textContent = '='}
-    };screenLeft
+    };
+
+    var buttonOper = document.getElementsByClassName('operators'); //read operators grid
+    for (var i = 0 ; i < buttonOper.length; i++) {
+      buttonOper[i].addEventListener('click', function  calculatorOper (e) { // create function to recall it
+        numbers[1]=e.target.innerHTML; // store the operator <---------------------------------------------------------
+        console.log('inside oper '+numbers);
+        return numbers;    
+      });
+      
+    }
+    console.log('oper '+numbers);
     
-    var button = document.getElementsByClassName('grid-item'); // this code read and and print in result  screen
+    var button = document.getElementsByClassName('grid-item'); //read numbers grid
     for (var i = 0 ; i < button.length; i++) {
-      button[i].addEventListener('click', function (e) {
+      button[i].addEventListener('click', function  calculator (e) { // create function calculator to recall it
 
         var newnum=e.target.innerHTML;
-        if(newnum === '.' && count[0] === '.'){newnum = ''}
+        if(newnum === '.' && count.includes('.')==true){calculator()}//only read one dot else recall calculator()
         count.push(newnum);
         console.log('count '+count+' count.length '+count.length);
 
         var print = parseFloat(count.join('')); // join and turn to float, take the first dot the otherones no!!!
         console.log('print '+print);
-        numbers[0]=print; // store the first number to be calculated
+        numbers[0]=print; // store the first number to be calculated  <---------------------------------------------------------
         console.log(numbers);
 
         if(e.target.innerHTML == '.'&& document.getElementById("result").innerHTML === '0'){ print = 0;} // no print NaN in the screen 
         document.getElementById("result").innerHTML = print;
-
-        
 
         if(e.target.innerHTML == 'C'){
           count = [];
           document.getElementById("result").innerHTML = 0;
         }
       });
-   }
+    }
+
+
   
