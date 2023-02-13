@@ -35,18 +35,36 @@ digitos.style.setProperty('--grid-cols', 3);
         resultScreen(e.target.innerHTML);
         
         if(e.target.innerHTML == '='){ // show the result after click '=' <---------------------------------------------------
-          console.log('inside = ' + numbers[1]);
-          if(numbers[1] == '+'){var result = numbers[0] + numbers[2];}
-          if(numbers[1] == '-'){result=numbers[0] - numbers[2];}
-          if(numbers[1] == '*'){result=numbers[0] * numbers[2];}
-          if(numbers[1] == '/'){result=numbers[0] / numbers[2];}
+          //var result = 0;
+          operations();
+/*          if(numbers[1] == '+'){var result = numbers[0] + numbers[2];}
+          if(numbers[1] == '-'){result = numbers[0] - numbers[2];}
+          if(numbers[1] == '*'){result = numbers[0] * numbers[2];}
+          if(numbers[1] == '/'){result = numbers[0] / numbers[2];}  */
+          var result = operations();
           resultScreen(result);
           numbers[0] = result;
-        }else{numbers[1]=e.target.innerHTML;} // store the operator <---------------------------------------------------------
+        }else{
+          numbers[1]=e.target.innerHTML; // store the operator <---------------------------------------------------------
+        }
       });
+    }
+
+    function operations (){
+      console.log('inside operationss ' + numbers[1]);
+      if(numbers[1] == '+'){var result = numbers[0] + numbers[2];}
+      if(numbers[1] == '-'){result = numbers[0] - numbers[2];}
+      if(numbers[1] == '*'){result = numbers[0] * numbers[2];}
+      if(numbers[1] == '/'){result = numbers[0] / numbers[2];}
+      console.log('operations result '+result)
+      return (result);
     }
     
     function resultScreen(value){ // show everything in the screen result
+      if (Number.isNaN(value) === true // avoid to show some errors
+          || typeof value === 'undefined' 
+          || value === Infinity)
+          { value = 0; } 
       document.getElementById("result").innerHTML = value;
     }
     
@@ -67,8 +85,8 @@ digitos.style.setProperty('--grid-cols', 3);
           numbers[0]=temporal; // store the first number to be calculated  <---------------------------------------------------------
           console.log('filling first box '+numbers);  
          }
-
-        if(e.target.innerHTML === '.' && document.getElementById("result").innerHTML === '0'){ temporal = 0;} // no print NaN in the screen 
+        //if (temporal == NaN){temporal=0;}
+        //if(e.target.innerHTML === '.' && document.getElementById("result").innerHTML === '0'){ temporal = 0;} // no print NaN in the screen 
         resultScreen(temporal);
 
         if(e.target.innerHTML == 'C'){
