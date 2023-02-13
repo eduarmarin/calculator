@@ -28,28 +28,6 @@ digitos.style.setProperty('--grid-cols', 3);
       if (c==4){cell.textContent = '='}
     };
 
-    var buttonOper = document.getElementsByClassName('operators'); //read operators grid
-    for (var i = 0 ; i < buttonOper.length; i++) {
-      buttonOper[i].addEventListener('click', function  calculatorOper (e) { // create function to recall it
-        temporalCero = [];
-        resultScreen(e.target.innerHTML);
-        
-        if(e.target.innerHTML == '='){ // show the result after click '=' <---------------------------------------------------
-          //var result = 0;
-          operations();
-/*          if(numbers[1] == '+'){var result = numbers[0] + numbers[2];}
-          if(numbers[1] == '-'){result = numbers[0] - numbers[2];}
-          if(numbers[1] == '*'){result = numbers[0] * numbers[2];}
-          if(numbers[1] == '/'){result = numbers[0] / numbers[2];}  */
-          var result = operations();
-          resultScreen(result);
-          numbers[0] = result;
-        }else{
-          numbers[1]=e.target.innerHTML; // store the operator <---------------------------------------------------------
-        }
-      });
-    }
-
     function operations (){
       console.log('inside operationss ' + numbers[1]);
       if(numbers[1] == '+'){var result = numbers[0] + numbers[2];}
@@ -68,6 +46,35 @@ digitos.style.setProperty('--grid-cols', 3);
       document.getElementById("result").innerHTML = value;
     }
     
+    var buttonOper = document.getElementsByClassName('operators'); //read operators grid
+    for (var i = 0 ; i < buttonOper.length; i++) {
+      buttonOper[i].addEventListener('click', function  calculatorOper (e) { // create function to recall it
+        temporalCero = [];
+        resultScreen(e.target.innerHTML);
+        
+        if(e.target.innerHTML == '='){ // show the result after click '=' <---------------------------------------------------
+          operations();
+          var result = operations();
+          resultScreen(result);
+          numbers[0] = result;
+          temporalCero = []; // celan all var and start a new operation
+          temporal = 0;
+          numbers = [];
+        }else{ // show result and continued with nex operation 
+          operations();
+          var result = operations();
+          numbers[1]=e.target.innerHTML; // store the operator <---------------------------------------------------------
+          if(numbers.length <= 2) { // read tthe very first operations else continued
+            resultScreen(numbers[0]);
+            return;
+          } else {
+            resultScreen(result);
+            numbers[0] = result;
+          }
+        }
+      });
+    }
+
     var button = document.getElementsByClassName('grid-item'); //read numbers grid
     for (var i = 0 ; i < button.length; i++) {
       button[i].addEventListener('click', function  calculator (e) { // create function calculator to recall it
@@ -75,19 +82,18 @@ digitos.style.setProperty('--grid-cols', 3);
         var newnum=e.target.innerHTML;
         if(newnum === '.' && temporalCero.includes('.')==true){calculator()}//only read one dot else recall calculator()
         
-        temporalCero.push(newnum); // push evey new digit
+        temporalCero.push(newnum); // push every new digit
         var temporal = parseFloat(temporalCero.join('')); // join and turn to float, take the first dot the otherones no!!!
 
-        if(numbers.length >= 2) {
-          numbers[2]=temporal; // store the second number to be calculated  <---------------------------------------------------------
+        if(numbers.length >= 2) { // store the second number to be calculated  <--------------------------------------------------
+          numbers[2]=temporal; 
           console.log('filling third box '+numbers);
         }else{
-          numbers[0]=temporal; // store the first number to be calculated  <---------------------------------------------------------
+          numbers[0]=temporal; // store the first number to be calculated  <------------------------------------------------------
           console.log('filling first box '+numbers);  
          }
-        //if (temporal == NaN){temporal=0;}
-        //if(e.target.innerHTML === '.' && document.getElementById("result").innerHTML === '0'){ temporal = 0;} // no print NaN in the screen 
-        resultScreen(temporal);
+
+         resultScreen(temporal);
 
         if(e.target.innerHTML == 'C'){
           temporalCero = [];
