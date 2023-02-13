@@ -34,7 +34,11 @@ digitos.style.setProperty('--grid-cols', 3);
       if(numbers[1] == '-'){result = numbers[0] - numbers[2];}
       if(numbers[1] == '*'){result = numbers[0] * numbers[2];}
       if(numbers[1] == '/'){result = numbers[0] / numbers[2];}
-      console.log('operations result '+result)
+      result = parseFloat(result);
+      var xx= result.toString().split('');
+      //xx = xx.split('');                    xx.length>=5 || 
+      //console.log('longgg ' +xx)
+      if (xx.includes('.') === true ){result = result.toFixed(2);}else{result = result.toFixed();}  
       return (result);
     }
     
@@ -43,6 +47,8 @@ digitos.style.setProperty('--grid-cols', 3);
           || typeof value === 'undefined' 
           || value === Infinity)
           { value = 0; } 
+          var xx = numbers[1];
+          
       document.getElementById("result").innerHTML = value;
     }
     

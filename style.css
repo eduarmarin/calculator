@@ -1,50 +1,77 @@
+body{
+  background-color: gray;
+}
 :root {
     --grid-cols: auto;
     --grid-rows: autos;
   }
-  .calculator{
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    background-color: aquamarine  ;
-  }
-  .digitos {
+
+  .digitos {            /* create the numbers grid */
     display: grid;
     grid-template-rows: repeat(var(--grid-rows), auto);
     grid-template-columns: repeat(var(--grid-cols), auto);
     /*box-shadow: 0.4em -0 .4em gray, -0.4em 0 .4em gray;*/
   }
-  .operatorGrid {
+  .operatorGrid {        /* create the operators grid */
     display: grid;
     grid-template-rows: repeat(var(--grid-rows), auto);
     grid-template-columns: repeat(var(--grid-cols), auto);
     /*cursor: pointer;
     box-shadow: 0.4em -0 .4em gray, -0.4em 0 .4em gray;*/
   }
-  .buttons{
+
+  .grid-item,
+  .operators {
+    border-collapse: collapse;
+    display: flex;
+    width: 60px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    /*padding: 1em;*/
+    /*text-align: center;*/
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-evenly;
+    background-color: gray;
+    font-size: x-large;
+    column-gap: 10px;    
+  }
+
+  .calculator{
+    margin: auto;
+    gap: 8px;
+    width: 280px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    background-color: aquamarine;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+
+  .buttons{             /* contain numbers and operators grids */
+    width: 96%;
     display: flex;
     flex-direction: row;
     cursor: pointer;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    align-content: space-around;
+    background-color: bisque;
+    border: 1px solid rgb(226, 181, 127);
+    border-radius: 5px;
   }
-  .grid-item,
-  .operators,
-  .result {
-    display: flex;
-    margin: 2px;
-    width: 90px;
-    height: 50px;
-    border: 1px solid black;
-    /*padding: 1em;*/
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    background-color: gray;
-    font-size: x-large;
-  }
+
   .grid-item{
-    margin-bottom: 16px;
+    margin: 3px;
+  }
+
+  .operators{
+    margin: 0.5px;
   }
 
   .grid-item:hover,
@@ -52,12 +79,16 @@
     scale: 1.05;
   }
 
-  .result {
+  .result {                /* show the result by screen*/
     width: 96%;
     height: 60px;
-    margin: 5px;
+   /* margin: 5px;*/
     display: flex;
     align-items: center;
     justify-content: flex-end;
     font-size: xx-large;
+    border: 1px solid black;
+    background-color: gray;
+    border-radius: 8px;
+    opacity: 80%;
   }
