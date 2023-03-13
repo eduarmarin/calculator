@@ -3,7 +3,7 @@ body{
 }
 :root {
     --grid-cols: auto;
-    --grid-rows: autos;
+    --grid-rows: auto;
   }
 
   .digitos {            /* create the numbers grid */
@@ -11,6 +11,7 @@ body{
     grid-template-rows: repeat(var(--grid-rows), auto);
     grid-template-columns: repeat(var(--grid-cols), auto);
     /*box-shadow: 0.4em -0 .4em gray, -0.4em 0 .4em gray;*/
+    row-gap: 4px;
   }
   .operatorGrid {        /* create the operators grid */
     display: grid;
@@ -26,7 +27,7 @@ body{
     display: flex;
     width: 60px;
     height: 50px;
-    border: 1px solid black;
+    border: 1px solid rgb(104, 30, 30);
     border-radius: 5px;
     /*padding: 1em;*/
     /*text-align: center;*/
@@ -36,6 +37,9 @@ body{
     background-color: gray;
     font-size: x-large;
     column-gap: 10px;    
+  }
+  .operators{
+    height: 45px;
   }
 
   .calculator{
